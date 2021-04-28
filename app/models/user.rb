@@ -25,16 +25,16 @@ class User < ApplicationRecord
   end
 
   # Users who have yet to confirme friend requests
-  # Replaced for associations
-  # def pending_friends
-  #   friendships.map { |friendship| friendship.friend unless friendship.status }.compact
-  # end
+  # Replace it for associations
+  def pending_friends
+     friendships.map { |friendship| friendship.friend unless friendship.status }.compact
+  end
 
   # Users who have requested to be friends
-  # Replaced for associations
-  # def friend_requests
-  #   inverse_friendships.map { |friendship| friendship.user unless friendship.status }.compact
-  # end
+  # Replace it for associations
+  def friend_requests
+    inverse_friendships.map { |friendship| friendship.user unless friendship.status }.compact
+  end
 
   def friends_and_own_posts
     Post.where(user: (self.friends.to_a << self))
