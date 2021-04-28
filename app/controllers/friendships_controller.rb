@@ -14,13 +14,13 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.find(params[:id])
     @friendship.update(status: true)
     @friendship = Friendship.create(user_id: @friendship.friend_id, friend_id: @friendship.user_id, status: true)
-    redirect_to user_path(current_user), notice: 'Friendship Accepted'
+    redirect_to user_path(current_user), notice: 'Friendship Accepted.'
   end
 
   def destroy
     @friendship = Friendship.find(params[:id])
     @friendship.destroy
-    redirect_to user_path(current_user), notice: 'Friendship rejected'
+    redirect_to user_path(current_user), notice: 'Friendship rejected.'
   end
 
   private
