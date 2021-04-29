@@ -52,45 +52,36 @@ module ApplicationHelper
     content_tag(:div, alert, class:"alert") unless alert.present? 
   end
 
-def show_user(user)
-  if current_user.friend?(user)
-  content_tag(:p, 'Friend of this user')
-  elsif current_user.pending_friends.include?(user)
-    content_tag(:p, 'Invitation pending')
-  elsif current_user.id != user.id && !current_user.pending_friends.include?(user) && !current_user.friend?(user) && !current_user.friend_requests.include?(user)
-    content_tag(:div) do 
-      form_with(model: @friendship) do |form|
-        form.hidden_field :friend_id, value: user.id
-        form.hidden_field :status, value: false 
-      form.submit "Invite to friendship"
+  def show_user(user)
+    if current_user.friend?(user)
+      content_tag(:p, 'Friend of this user')
+    elsif current_user.pending_friends.include?(user)
+      content_tag(:p, 'Invitation pending')
+    elsif current_user.id != user.id && !current_user.pending_friends.include?(user) && !current_user.friend?(user) && !current_user.friend_requests.include?(user)
+      content_tag(:div, (render partial: "users/formfriendship", locals: {user: user}) )
+    elsif current_user.friend_requests.include?(user)
+      out = ''
+      out << link_to(link_to('Accept Friend ||', friendship_path(current_user.friendship(user).id), method: 'patch'))
+      out << link_to(link_to('Reject Invitation',  friendship_path(current_user.friendship(user).id), method: :delete))
+      out.html_safe
     end
+  end
+
+
+  def show_post
+    content = ''
+    user_post = current_user.friends_and_own_posts
+    user_post.each do |post|
+      content << "<li class='post'>"
+      content << link_to(link_to(post.user.name, user_path(post.user), class: 'post-author'))
+      content << content_tag(:div, (render partial: "posts/like", locals: {post:post}))       
+      content << content_tag(:p, post.content)
+      content << content_tag(:div, (render partial: "comments/comment", collection: post.comments), class:"post-comments-section" )
+      content << content_tag(:div, (render partial: "posts/form", locals: {post:post})) 
+      content << '</li>'
     end
-  elsif current_user.friend_requests.include?(user)
-    out = ''
-    out << link_to(link_to('Accept Friend ||', friendship_path(current_user.friendship(user).id), method: 'patch'))
-    out << link_to(link_to('Reject Invitation',  friendship_path(current_user.friendship(user).id), method: :delete))
-    out.html_safe
+    content.html_safe
   end
-end
-
-
-def show_post
-  content = ''
-  user_post = current_user.friends_and_own_posts
-  user_post.each do |post|
-    content << "<li class='post'>"
-    content << link_to(link_to(post.user.name, user_path(post.user), class: 'post-author'))
-    content << content_tag(:div, (render partial: "posts/like", locals: {post:post})) 
-     
-   content << content_tag(:p, post.content)
-
-   content << content_tag(:div, (render partial: "comments/comment", collection: post.comments), class:"post-comments-section" )
-
-   content << content_tag(:div, (render partial: "posts/form", locals: {post:post})) 
-  content << '</li>'
-  end
-  content.html_safe
-end
 
 end
 
