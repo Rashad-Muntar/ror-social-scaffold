@@ -22,4 +22,16 @@ feature 'Creating a comment', type: :feature do
       expect(page).to have_content('Comment was successfully created.')
     end
   end
+
+
+    scenario 'fail when comment is field is empty' do
+      fill_in 'post_content', with: ''
+      click_button 'commit'
+      within('#new_comment') do
+        fill_in 'comment_content', with: ''
+        click_button 'commit'
+      end
+      expect(page).to have_content("Content can't be blank")
+    end
+
 end
