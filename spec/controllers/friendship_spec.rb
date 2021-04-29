@@ -27,7 +27,7 @@ feature 'Add new friends', type: :feature do
 
     scenario 'allows users to send friend requests' do
       click_button('Invite to friendship')
-      @friendship = Friendship.create(id:2, user_id:user2.id, friend_id:user1.id, status:false)
+      @friendship = Friendship.create(id: 2, user_id: user2.id, friend_id: user1.id, status: false)
       expect(page).to have_content('Friend Invitation has been sent.')
     end
   end
