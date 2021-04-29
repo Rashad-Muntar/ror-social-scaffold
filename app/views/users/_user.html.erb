@@ -5,6 +5,7 @@
   </span>
   <span>
   <div class="actions">
+  <%= show_post(user) %>
     <% if current_user.friend?(user) %>
       <p>Friend of this user</p>
     <% elsif current_user.pending_friends.include?(user) %>

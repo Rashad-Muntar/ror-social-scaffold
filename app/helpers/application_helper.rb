@@ -1,4 +1,6 @@
 module ApplicationHelper
+
+
   def menu_link_to(link_text, link_path)
     class_name = current_page?(link_path) ? 'menu-item active' : 'menu-item'
 
@@ -17,4 +19,56 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
+
+  def show_sign_out
+    out = ''
+    out << link_to(link_to('Sign out', destroy_user_session_path, method: :delete)) if user_signed_in?
+    out.html_safe
+  end
+
+  def show_new_event
+    out = ''
+    out << link_to(link_to('New Event', new_event_path)) if user_signed_in?
+    out.html_safe
+  end
+
+  def show_sign_in
+    out = ''
+    out << link_to(link_to('Sign In', new_user_session_path)) unless user_signed_in?
+    out.html_safe
+  end
+
+  def show_sign_up
+    out = ''
+    out << link_to(link_to('Sign Up', new_user_registration_path)) unless user_signed_in?
+    out.html_safe
+  end
+
+  def show_notice
+    content_tag(:div, notice, class:"notice") unless notice.present? 
+  end
+
+  def show_alert
+    content_tag(:div, alert, class:"alert") unless alert.present? 
+  end
+
+def show_post(user)
+  if current_user.friend?(user)
+  content_tag(:p, 'Friend of this user')
+  elsif current_user.pending_friends.include?(user)
+    content_tag(:p, 'Invitation pending')
+  elsif current_user.id != user.id && !current_user.pending_friends.include?(user) && !current_user.friend?(user) && !current_user.friend_requests.include?(user)
+     form_with(model: @friendship) do |form|
+        form.hidden_field :friend_id, value: user.id
+        form.hidden_field :status, value: false 
+      form.submit "Invite to friendship"
+    end
+  elsif current_user.friend_requests.include?(user)
+    out = ''
+    out << link_to(link_to('Accept Friend', friendship_path(current_user.friendship(user).id), method: 'patch'))
+    out << link_to(link_to('Reject Invitation',  friendship_path(current_user.friendship(user).id), method: :delete))
+    out.html_safe
+  end
+end
+
 end
