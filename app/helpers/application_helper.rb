@@ -58,10 +58,12 @@ def show_post(user)
   elsif current_user.pending_friends.include?(user)
     content_tag(:p, 'Invitation pending')
   elsif current_user.id != user.id && !current_user.pending_friends.include?(user) && !current_user.friend?(user) && !current_user.friend_requests.include?(user)
-     form_with(model: @friendship) do |form|
+    content_tag(:form) do 
+      form_with(model: @friendship) do |form|
         form.hidden_field :friend_id, value: user.id
         form.hidden_field :status, value: false 
       form.submit "Invite to friendship"
+    end
     end
   elsif current_user.friend_requests.include?(user)
     out = ''
