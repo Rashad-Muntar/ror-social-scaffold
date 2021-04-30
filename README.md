@@ -3,7 +3,7 @@
 > This a rails app that allow users to signup and login. The signed up users can create post to which is associated to the user's account. User is able to send for frienship invitaton and would be able to be invited. User is able to accept or  reject frienship inviation. Built with Ruby on Rails 6.
 ## Built With
 
-- Ruby on Rails MVC Framework
+- Ruby on Rails MVC Framework.
 
 ## Getting Started
 
