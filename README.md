@@ -1,83 +1,81 @@
-# Scaffold for social media app with Ruby on Rails
+# Social Media
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
-
+> This a rails app that allow users to signup and login. The signed up users can create post to which is associated to the user's account. User is able to send for frienship invitaton and would be able to be invited. User is able to accept or  reject frienship inviation. Built with Ruby on Rails 6.
 ## Built With
 
-- Ruby v2.7.0
-- Ruby on Rails v5.2.4
-
-## Live Demo
-
-TBA
-
+- Ruby on Rails MVC Framework
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To set up a local version of this project, a collection of steps have been put together to help guide you from installations to usage. Simply follow the guide below and you'll be up and running in no time.
 
-### Prerequisites
+### Set up
 
-Ruby: 2.6.3
-Rails: 5.2.3
-Postgres: >=9.5
+- Install [git](https://git-scm.com/downloads)
+- Install [the Ruby programming language](https://ruby-doc.org/downloads/), if you haven't already.
+- Install [the Ruby on Rails Framework](https://guides.rubyonrails.org/getting_started.html), if you haven't already.
+- Open Terminal
+- Navigate to the preferred location/folder you want the app on your local machine. Use `cd <file-path>` for this.
+- Run `git clone https://github.com/Rashad-Muntar/ror-social-scaffold.git` to download the source file.
+- Now that you have a local copy of the project, navigate to the root of the project folder from your terminal.
+- Run `bundle install` to install all dependencies in the Gemfile file.
+- Install postgres to use database and set up authentication
+- Run `rails db:migrate` to generate database tables.
+- Run `rails server` to get a server running on your local machine.
 
-### Setup
+### Other Dependencies
 
-Instal gems with:
-
-```
-bundle install
-```
-
-Setup database with:
-
-```
-   rails db:create
-   rails db:migrate
-```
-
-### Github Actions
-
-To make sure the linters' checks using Github Actions work properly, you should follow the next steps:
-
-1. On your recently forked repo, enable the GitHub Actions in the Actions tab.
-2. Create the `feature/branch` and push.
-3. Start working on your milestone as usual.
-4. Open a PR from the `feature/branch` when your work is done.
-
+- Rubocop: This is a tool for checking code quality and ensuring they meet the requirements. Don’t worry about this if you’re not a developer. Microverse provides a wonderful setup guide for [rubocop here](https://github.com/microverseinc/linters-config/tree/master/ruby).
 
 ### Usage
 
-Start server with:
+At this point, you now have everything you need to properly run the program (source code, ruby, rails, rubocop). If not, refer back to the setup section of this documentation.
 
-```
-    rails server
-```
+To use the program, follow the instructions below:
 
-Open `http://localhost:3000/` in your browser.
+Sign Up:
+   Sign up
+- To create a new user, click on the `Sign Up` link and choose a name, email, password and pasword confirmation.
+  Sign In:
+- To sign in, click on the `Sign In` link and complete with your email and password.
+  Sign out:
+- To sign out, click on the `Sign Out` link.
 
-### Run tests
+-Create a Post:
 
-```
-    rpsec --format documentation
-```
+- First you need to be logged in or sign up.
+- To create a new event, type your post into the new post form and click 'save' button.
 
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
+Send Friendship invitation
 
-### Deployment
+- Friendship invitation to other user's  by clicking on the `Invite to frienship` button.
 
-TBA
+Accept or Reject
+- User who received frienship invitaion can accept by clicking the `Accept Invitation` or reject by clicking `Reject Invitation` 
+
+##Live version
+- Application was deployed to heroku 
+- https://glacial-mountain-56841.herokuapp.com/
 
 ## Authors
 
-TBA
+👤 **Rashad Muntar**
+
+- GitHub: [@Rashad-Muntar](https://github.com/Rashad-Muntar)
+- Twitter - [@RashadToure](https://twitter.com/RashadToure)
+- LinkedIn: [Rashad Muntar](https://www.linkedin.com/in/rashad-muntar/)
+
+👤 **Federico Ignacio Lopez Cechini**
+
+- GitHub: [@FdI96](https://github.com/FdI96)
+- Twitter: [@federicolopezc7 ](https://twitter.com/federicolopezc7)
+- LinkedIn: [Federico Ignacio](https://www.linkedin.com/in/federico-ignacio-3285411a4/)
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/Rashad-Muntar/ror-social-scaffold/issues).
 
 ## Show your support
 
@@ -85,9 +83,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
+- [Micoverse](https://microverse.org)
+
 
 ## 📝 License
 
-TBA
-
+This project is [MIT](https://github.com/Rashad-Muntar/ror-social-scaffold/blob/friendshipv2/LICENSE) licensed.
